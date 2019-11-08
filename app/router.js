@@ -7,12 +7,12 @@ module.exports = app => {
   const { router, controller } = app;
 
   // OAuth controller
-  const apiVersion = 1;
-  router.resources('users', `/api/v${apiVersion}/users`, controller.v1.users);
+  const apiVersion = 'v1';
+  router.resources('users', `/api/${apiVersion}/users`, controller.v1.users);
 
-  router.get('users.authorize', `/api/v${apiVersion}/authorize`, controller.users.authorize);
-  router.resources('users.authorizeToken', `/api/v${apiVersion}/users/authorizeToken`, controller.users.authorizeToken);
-  router.resources('users.authorizeToken', `/api/v${apiVersion}/users/authorize`, controller.users.authorizeToken);
-
+  router.get('users.authorize', `/api/${apiVersion}/authorize`, controller[apiVersion].users.authorize);
+  router.resources('users.token', `/api/${apiVersion}/users/token`, controller[apiVersion].users.token);
+  router.resources('users.authorize', `/api/${apiVersion}/users/authorize`, controller[apiVersion].users.authorize);
+  router.resources('user.authenticate', `/api/${apiVersion}/users/authenticate`, controller[apiVersion].users.authenticate);
 };
 
