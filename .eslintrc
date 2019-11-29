@@ -1,3 +1,8 @@
 {
-  "extends": "eslint-config-egg"
+  "extends": "eslint-config-egg",
+  "rules": {
+    "react/jsx-props-no-spreading": 0,
+    "prefer-const": 1,
+    "no-unused-vars": 1
+  }
 }

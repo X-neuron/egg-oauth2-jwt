@@ -3,12 +3,12 @@
 module.exports = app => {
   const { STRING, DATE } = app.Sequelize;
 
-  const app = app.model.define('app', {
+  const cumstomApp = app.model.define('cumstomApp', {
     openId: STRING(40),
-    name:STRING(30),
+    name: STRING(30),
     public_secret: STRING(40),
     private_secret: STRING(40),
-    encryption_type:STRING(20),
+    encryption_type: STRING(20),
     last_sign_in_at: DATE,
     last_sign_out_at: DATE,
     create_at: DATE,
