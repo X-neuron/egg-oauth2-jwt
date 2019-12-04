@@ -1,16 +1,23 @@
 'use strict';
 
-const Controller = require('egg').Controller;
+// const Controller = require('egg').Controller;
+const Controller = require('../../core/base_controller');
+const ecc = require('eosjs-ecc');
 
 class UsersController extends Controller {
   async create() {
     const { ctx, app } = this;
+    console.log(ctx.params);
+
+
     const regMesRule = {
-      account: { type: 'string' },
-      pwd: { type: 'string' },
-      birthday: { type: 'string' },
-      education: { type: 'string' },
+      // openId: { type: 'interger', required: true },
+      account: { type: 'string', required: true },
+      epwd: { type: 'string', required: true },
+      email: { type: 'string', required: true },
+      tel: { type: 'string', required: true },
     };
+
 
     // ctx.logger.warn(ctx.request.body);
     // 校验参数
@@ -23,11 +30,22 @@ class UsersController extends Controller {
       ctx.body = { msg: err.errors };
       return;
     }
-    await app.redis.set('account', 'ture');
+
+
+    if (ecc.isValidPublic(ctx.params.params.pkKey)) {
+      const t = 1;
+
+    } else {
+      ctx.status = 301;
+      ctx.body = { msg: '非法请求，拒绝访问！' };
+    }
+
+
     ctx.status = 200;
     ctx.body = { msg: '注册成功！' };
     // ctx.service.return.ajaxReturn.success(200, {});
   }
+
 }
 
 module.exports = UsersController;

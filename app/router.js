@@ -10,6 +10,7 @@ module.exports = app => {
   // Account register
   // router.get(`/api/${apiVersion}/regToken `, controller[apiVersion].regToken.generateToken);
   router.get('/api/v1/regToken', controller.v1.regToken.generateToken);
+  router.resources('users', '/api/v1/users', controller.v1.users);
   // router.resources('userRegister', `/api/${apiVersion}/userRegister `, controller[apiVersion].users);
 
   // OAuth controller
